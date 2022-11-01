@@ -15,3 +15,8 @@ The frontend of the project was built using custom styling via [CSS](https://www
 To experiment with and use the web application, visit The [TAMID at Yale URL Shortener](https://urlshortnertamid.herokuapp.com/), and follow the directions to have a fun time!
 
 However, for examples of how the web application works, long URLs such as http://catalog.yale.edu/ycps/subjects-of-instruction/computerscienceandeconomics/ would be shortened to https://urlshortnertamid.herokuapp.com/dd96f, for a more easily accessible link.
+
+## Features
+- [x] Fast and lightweight
+- [x] RESTFUL web service that allows users to POST a URL and recieve a shorter URL
+- [x] A web application for users to access the service's features
