@@ -8,6 +8,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+
+#these imports allow us to deploy our program as a Heroku web application
 import django_heroku
 import dj_database_url
 
@@ -24,11 +26,13 @@ SECRET_KEY = 'lqhtkx3n6y3%l63fq%90pxk@7#l+jyhz$6a^v%3g)#2o265tk!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#allows us to run our web application on any server
 ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
+#add 'shortner' to the list of Django applications that are activated in this Django instance, so that we can activate our web application
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'shortner'
 ]
 
+#an array of hooks into Django's request/response processing
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#allows us to determine the root URLconf and thus map between URl patterns and the view functions necessary to call these URLs
 ROOT_URLCONF = 'urlshort.urls'
 
 TEMPLATES = [
@@ -67,12 +73,14 @@ TEMPLATES = [
     },
 ]
 
+#instruments a WSGI application entry point so that the application server can communicate with our code
 WSGI_APPLICATION = 'urlshort.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+#want to initialize our default database via the dj_database_url.config method to be a Django database connection dictionary that has data specified in each URL
 DATABASES = {
     'default': dj_database_url.config()
 }
@@ -114,5 +122,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+#activates Django-Heroku
 STATIC_URL = '/static/'
 django_heroku.settings(locals())

@@ -1,5 +1,6 @@
 <head>
   <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  <!-- loads the boostrap CSS into our project -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <style>
       *,
@@ -8,14 +9,15 @@
 box-sizing: border-box;
 }
 
+/* slight styling to add spacing and alignment to our web application's body, section*/
 body,
 section {
-/* display: flex; */
 align-items: center;
 justify-content: center;
 padding: 1rem;
 }
 
+/* sets the minimum height to be 100% of the viewport's height and sets the font family, line height, and text color as well */
 body {
 min-height: 100vh;
 font-family: "Lato", sans-serif;
@@ -23,31 +25,32 @@ line-height: 1.5;
 color: #111;
 }
 
+/* adds a border around the section of our frontend that holds our URL shortening implementation */
 main {
 width: 100%;
 border: 1.5px solid #e2e8f0;
 border-radius: 0.25rem;
-/* background-image: linear-gradient(#d1aad7, #d1aad7 15%, #c88bc4 30%,#7b8fdd 45%,#86bff2 60%,#bbdef2 75%, #bbdef2); */
 }
 
+/* adds spacing between the title and the top of the page */
 h1 {
 padding-top: 1rem;
-/* color: white; */
 }
 
+/* designs the section attribute so that elements can appears next to each other */
 section {
-/* text-align: center; */
 white-space: nowrap;
 overflow-x: auto;
-/* background-color: white; */
 }
 
+/* creates a label for our shortened URL and ads padding to it, to serve as a space between the label and the actual shortened URL */
 .shortened-url-label {
   font-weight: bold;
   display: inline-block;
   padding: 0px 10px 0px 0px;
 }
 
+/* styles the shortened URL to be colored blue and be on the same line as its label */
 .insert-link-id {
   font-size: 16px;
   color: #2670ff;
@@ -57,21 +60,28 @@ overflow-x: auto;
 </style>
 </head>
 <main>
+  <!-- using Boostrap class container for default spacing -->
   <div class="container">
+    <!-- title of our application along with useful information about how to use it -->
       <h1>TAMID at Yale URL Shortener</h1>
       <p>We present to you a web application that can be used to shorten URLs of any length. Simply insert your URL into the field labeled 
           "Enter URL Here" and then click the shrink button or press enter. Immediately afterwards, you will be presented with a shortened
           URL in the "Shortened URL" field. For ease of use, only insert URLs that begin with "https://" (i.e. https://youtube.com).</p>
+
+      <!-- form via which users will input their long URLs that they want to shorten. Also use Boostrap classes to style the form, buttons, and text -->
       <form id="post-form" class="my-4 form-inline">
           {% csrf_token %}
           <input required type="text" name="link" id="link" placeholder="Enter URL Here" class="form-control col mr-2">
           <button class="btn btn-success" type="submit" id="shorten">Shrink</button>
       </form>
+
+      <!-- returns the shortened URL along with its label -->
       <section id="section" style="padding-left: 0rem;"><p class="shortened-url-label">Shortened URL:</p><h2 class="insert-link-id"></h2></section>
   </div>
   
 </main>
 
+<!-- a script to post the link of our long URL and then insert it into the h2 tag in our section taag, if we are successful in generating an ID for the long URL -->
 <script type="text/javascript">
 $(document).on('submit','#post-form',function(e){
   e.preventDefault();
