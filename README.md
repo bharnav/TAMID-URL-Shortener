@@ -1,4 +1,3 @@
-# TAMID-URL-Shortener
 <h1 align="center">TAMID at Yale URL Shortener</h1>
 
 The [TAMID at Yale URL Shortener](https://urlshortnertamid.herokuapp.com/) is a URL shortening web application.
