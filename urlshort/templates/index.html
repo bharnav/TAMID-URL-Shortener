@@ -1,0 +1,91 @@
+<head>
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+      *,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+body,
+section {
+/* display: flex; */
+align-items: center;
+justify-content: center;
+padding: 1rem;
+}
+
+body {
+min-height: 100vh;
+font-family: "Lato", sans-serif;
+line-height: 1.5;
+color: #111;
+}
+
+main {
+width: 100%;
+border: 1.5px solid #e2e8f0;
+border-radius: 0.25rem;
+/* background-image: linear-gradient(#d1aad7, #d1aad7 15%, #c88bc4 30%,#7b8fdd 45%,#86bff2 60%,#bbdef2 75%, #bbdef2); */
+}
+
+h1 {
+padding-top: 1rem;
+/* color: white; */
+}
+
+section {
+/* text-align: center; */
+white-space: nowrap;
+overflow-x: auto;
+/* background-color: white; */
+}
+
+.shortened-url-label {
+  font-weight: bold;
+  display: inline-block;
+  padding: 0px 10px 0px 0px;
+}
+
+.insert-link-id {
+  font-size: 16px;
+  color: #2670ff;
+  display: inline-block;
+}
+
+</style>
+</head>
+<main>
+  <div class="container">
+      <h1>TAMID at Yale URL Shortener</h1>
+      <p>We present to you a web application that can be used to shorten URLs of any length. Simply insert your URL into the field labeled 
+          "Enter URL Here" and then click the shrink button or press enter. Immediately afterwards, you will be presented with a shortened
+          URL in the "Shortened URL" field. For ease of use, only insert URLs that begin with "https://" (i.e. https://youtube.com).</p>
+      <form id="post-form" class="my-4 form-inline">
+          {% csrf_token %}
+          <input required type="text" name="link" id="link" placeholder="Enter URL Here" class="form-control col mr-2">
+          <button class="btn btn-success" type="submit" id="shorten">Shrink</button>
+      </form>
+      <section id="section" style="padding-left: 0rem;"><p class="shortened-url-label">Shortened URL:</p><h2 class="insert-link-id"></h2></section>
+  </div>
+  
+</main>
+
+<script type="text/javascript">
+$(document).on('submit','#post-form',function(e){
+  e.preventDefault();
+
+  $.ajax({
+    type:'POST',
+    url:'/create',
+    data:{
+      link:$('#link').val(),
+      csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+    },
+    success: function(data){
+      $('h2').html("https://urlshortnertamid.herokuapp.com/"+data)
+    }
+  });
+});
+</script>
